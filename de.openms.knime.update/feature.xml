@@ -23,4 +23,9 @@
    <includes
          id="com.genericworkflownodes.knime.feature"
          version="0.0.0"/>
+
+   <includes
+         id="de.openms.knime.dynamicJSViewers.feature"
+         version="0.0.0"/>
+
 </feature>
