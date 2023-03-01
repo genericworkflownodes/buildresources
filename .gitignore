@@ -1,0 +1,12 @@
+.DS_store
+
+# Compilation products
+*.class
+**/bin/
+**/target/**
+**/.settings/**
+
+# Package Files #
+*.jar
+*.war
+*.ear

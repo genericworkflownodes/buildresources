@@ -2,4 +2,5 @@
 <site>
    <feature id="de.openms.feature"/>
    <feature id="de.openms.knime.dynamicJSViewers.feature"/>
+   <feature id="com.genericworkflownodes.knime.feature"/>
 </site>
