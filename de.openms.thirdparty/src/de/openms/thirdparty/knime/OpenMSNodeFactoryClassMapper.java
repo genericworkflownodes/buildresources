@@ -19,11 +19,28 @@ public class OpenMSNodeFactoryClassMapper extends MapNodeFactoryClassMapper {
         Map<String, Class<? extends NodeFactory<? extends NodeModel>>> map = new HashMap<>();
         Bundle bundle = FrameworkUtil.getBundle(getClass());
         Enumeration<URL> entries = bundle.findEntries("/target/classes/de/openms/thirdparty/knime/nodes/", "*Factory.class", true);
-        while (entries.hasMoreElements())
+        while (entries != null && entries.hasMoreElements())
         {
             URL classURL = entries.nextElement();
             String path = classURL.getFile();
             String classnameNoBinFolderDots = path.replace("/target/classes/", "").replace(".class", "").replace('/', '.');
+            String oldClassname = classnameNoBinFolderDots.replace("thirdparty.", "");
+            
+            Class<? extends NodeFactory<? extends NodeModel>> c;
+            try {
+                c = (Class<? extends NodeFactory<? extends NodeModel>>) bundle.loadClass(classnameNoBinFolderDots);
+                map.put(oldClassname, c);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        Enumeration<URL> entries2 = bundle.findEntries("/bin/de/openms/thirdparty/knime/nodes/", "*Factory.class", true);
+        while (entries2 != null && entries2.hasMoreElements())
+        {
+            URL classURL = entries2.nextElement();
+            String path = classURL.getFile();
+            String classnameNoBinFolderDots = path.replace("/bin/", "").replace(".class", "").replace('/', '.');
             String oldClassname = classnameNoBinFolderDots.replace("thirdparty.", "");
             
             Class<? extends NodeFactory<? extends NodeModel>> c;
